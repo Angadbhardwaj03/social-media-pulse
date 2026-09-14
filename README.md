@@ -2,6 +2,7 @@
 
 A small social feed app (signup → login → post → like → comment), inspired by the
 Social page in the TaskPlanet app. Built with the MERN stack.
+live demo : https://social-media-pulse-1.onrender.com/
 
 ```
 social-app/
