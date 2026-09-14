@@ -14,10 +14,16 @@ connectDB();
 // --- Core middleware ---
 app.use(express.json());
 
-const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173").split(",");
+const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173").split(",").map(o => o.trim());
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      // allow requests with no origin (like mobile apps or curl)
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(null, true); // allow all origins or allow matched
+    },
     credentials: true,
   })
 );
